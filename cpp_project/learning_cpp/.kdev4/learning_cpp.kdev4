@@ -1,0 +1,56 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x18\x00l\x00e\x00a\x00r\x00n\x00i\x00n\x00g\x00_\x00c\x00p\x00p)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/ain/projects/godot_cpp_projects/godot_learning_cpp/cpp_project/learning_cpp/build
+Build Type=Debug
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host System
+
+[CustomDefinesAndIncludes][ProjectPath0]
+Path=.
+parseAmbiguousAsCPP=true
+parserArguments=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++14
+parserArgumentsC=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c99
+parserArgumentsCuda=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++14
+parserArgumentsOpenCL=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -cl-std=CL1.1
+
+[CustomDefinesAndIncludes][ProjectPath0][Compiler]
+Name=GCC
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=learning_cpp
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00\x18\x00l\x00e\x00a\x00r\x00n\x00i\x00n\x00g\x00_\x00c\x00p\x00p\x00\x00\x00\x18\x00l\x00e\x00a\x00r\x00n\x00i\x00n\x00g\x00_\x00c\x00p\x00p)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/ain/projects/godot_cpp_projects/godot_learning_cpp/cpp_project/learning_cpp
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Kill Before Executing Again=4194304
+Project Target=learning_cpp,learning_cpp
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[NinjaBuilder]
+Number Of Jobs=2
+Override Number Of Jobs=true
+
+[Project]
+VersionControlSupport=
