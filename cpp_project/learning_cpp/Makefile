@@ -10,15 +10,15 @@ src_code= src/*.cpp src/**/*.cpp
 
 
 
-
 #linux stuff
 #include
-include_linux=-I/home/ain/projects/godot_cpp_projects/godot_cpp_linux_debug/include/  -I/home/ain/projects/godot_cpp_projects/godot_cpp_linux_debug/include/gen/ -I/home/ain/projects/godot_cpp_projects/godot_cpp_linux_debug/include/core/ -I/home/ain/projects/godot_cpp_projects/godot_cpp_linux_debug/godot-headers/ -Iinclude/ -Iinclude/game_1/ -Iinclude/game_2/ -Iinclude/game_3/ -Iinclude/game_4/
+include_linux=-I/home/ain/projects/godot_cpp_projects/godot_cpp/include/  -I/home/ain/projects/godot_cpp_projects/godot_cpp/include/gen/ -I/home/ain/projects/godot_cpp_projects/godot_cpp/include/core/ -I/home/ain/projects/godot_cpp_projects/godot_cpp/godot-headers/ -Iinclude/ -Iinclude/game_1/ -Iinclude/game_2/ -Iinclude/game_3/ -Iinclude/game_4/
 
 #libgodot-cpp
 #debug
-linux_godot_lib_path_debug=-L/home/ain/projects/godot_cpp_projects/godot_cpp_linux_debug/lib/
+linux_godot_lib_path_debug=-L/home/ain/projects/godot_cpp_projects/godot_cpp/bin/
 linux_godot_lib_debug=-lgodot-cpp.linux.debug.64
+
 
 #release
 linux_godot_lib_path_release=-L/home/ain/projects/godot_cpp_projects/godot_cpp_linux_release/lib/
@@ -35,15 +35,15 @@ linux_godot_lib_release=-lgodot-cpp.linux.release.64
 
 #windows stuff
 #include
-include_windows=-I/home/ain/projects/godot_cpp_projects/godot_cpp_windows_debug/godot-headers/ -I/home/ain/projects/godot_cpp_projects/godot_cpp_windows_debug/include/ -I/home/ain/projects/godot_cpp_projects/godot_cpp_windows_debug/include/gen/ -I/home/ain/projects/godot_cpp_projects/godot_cpp_windows_debug/include/core/ -Iinclude/ -Iinclude/game_1/ -Iinclude/game_2/ -Iinclude/game_3/ -Iinclude/game_4/
+include_windows=-I/home/ain/projects/godot_cpp_projects/godot_cpp/godot-headers/ -I/home/ain/projects/godot_cpp_projects/godot_cpp/include/ -I/home/ain/projects/godot_cpp_projects/godot_cpp/include/gen/ -I/home/ain/projects/godot_cpp_projects/godot_cpp/include/core/ -Iinclude/ -Iinclude/game_1/ -Iinclude/game_2/ -Iinclude/game_3/ -Iinclude/game_4/
 
 #libgodot-cpp
 #debug
-windows_godot_lib_path_debug=-L/home/ain/projects/godot_cpp_projects/godot_cpp_windows_debug/lib/
+windows_godot_lib_path_debug=-L/home/ain/projects/godot_cpp_projects/godot_cpp/bin/
 windows_godot_lib_debug=-lgodot-cpp.windows.debug.64
 
 #release
-windows_godot_lib_path_release=-L/home/ain/projects/godot_cpp_projects/godot_cpp_windows_release/lib/
+windows_godot_lib_path_release=-L/home/ain/projects/godot_cpp_projects/godot_cpp/lib/
 windows_godot_lib_release=-lgodot-cpp.windows.release.64
 
 
@@ -61,7 +61,8 @@ release: linux_release windows_release
 
 debug: linux_debug windows_debug
 
-
+clean:
+	 rm *.o ./**/*.o
 #
 #note the text bellow works with only executables note shared libs
 #
@@ -79,10 +80,10 @@ debug: linux_debug windows_debug
 
 #compile for linux
 linux_debug: $(src_o_code)
-	g++ -std=c++14 -g3 -Wall -m64 -march=x86-64    -fPIC -shared -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_debug.so -shared -g3   $(src_o_code)  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -g3 -Wall -m32 -march=x86-64    -fPIC -shared -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_debug.so -shared -g3   $(src_o_code)  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 linux_release: 
-	g++ -std=c++14  -Wall -m64 -march=x86-64   -fPIC -shared -O3 -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_release.so -shared    -O3 $(src_code)  $(include_linux) $(linux_godot_lib_path_release) $(linux_godot_lib_release)
+	g++ -std=c++14  -Wall -m32 -march=x86-64   -fPIC -shared -O3 -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_release.so -shared    -O3 $(src_code)  $(include_linux) $(linux_godot_lib_path_release) $(linux_godot_lib_release)
 
 
 
@@ -104,10 +105,10 @@ linux_release:
 
 #compile for windows
 windows_debug: 
-	x86_64-w64-mingw32-g++ -std=c++14 -g3 -Wall -m64 -march=x86-64    -static-libstdc++ -static-libgcc  -fPIC -shared -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_debug.dll   -shared -g3   $(src_code) $(include_windows)  $(windows_godot_lib_path_debug) $(windows_godot_lib_debug)
+	i686-w64-mingw32-g++ -std=c++14 -g3 -Wall -m32 -march=x86-64    -static-libstdc++ -static-libgcc  -fPIC -shared -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_debug.dll   -shared -g3   $(src_code) $(include_windows)  $(windows_godot_lib_path_debug) $(windows_godot_lib_debug)
 
 windows_release: 
-	x86_64-w64-mingw32-g++ -std=c++14  -Wall -m64 -march=x86-64   -static-libstdc++ -static-libgcc  -fPIC -shared -O3 -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_release.dll   -shared   -O3  $(src_code) $(include_windows)  $(windows_godot_lib_path_release) $(windows_godot_lib_release)
+	i686-w64-mingw32-g++ -std=c++14  -Wall -m32 -march=x86-64   -static-libstdc++ -static-libgcc  -fPIC -shared -O3 -o /home/ain/projects/godot_cpp_projects/godot_learning_cpp/code/lib/lib_godot_release.dll   -shared   -O3  $(src_code) $(include_windows)  $(windows_godot_lib_path_release) $(windows_godot_lib_release)
 
 
 
@@ -130,40 +131,40 @@ windows_release:
 #compile o files
 
 o_files/test.o: src/test.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3    -o o_files/test.o -shared -g3 -c src/test.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3    -o o_files/test.o -shared -g3 -c src/test.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/Root.o: src/Root.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/Root.o -shared -g3 -c src/Root.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/Root.o -shared -g3 -c src/Root.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/road.o: src/road.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/road.o -shared -g3 -c src/road.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/road.o -shared -g3 -c src/road.cpp $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/player.o: src/player.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/player.o -shared -g3 -c src/player.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/player.o -shared -g3 -c src/player.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/GodotLibrary.o: src/GodotLibrary.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/GodotLibrary.o -shared -g3 -c src/GodotLibrary.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/GodotLibrary.o -shared -g3 -c src/GodotLibrary.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/border_area2d.o: src/border_area2d.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/border_area2d.o -shared -g3 -c src/border_area2d.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/border_area2d.o -shared -g3 -c src/border_area2d.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/game_1_border.o: src/game_1/game_1_border.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/game_1_border.o -shared -g3 -c src/game_1/game_1_border.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/game_1_border.o -shared -g3 -c src/game_1/game_1_border.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/game_1_xo.o: src/game_1/game_1_xo.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/game_1_xo.o -shared -g3 -c src/game_1/game_1_xo.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/game_1_xo.o -shared -g3 -c src/game_1/game_1_xo.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/main.o: src/game_2/main.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/main.o -shared -g3 -c src/game_2/main.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/main.o -shared -g3 -c src/game_2/main.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/intro.o: src/intro.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/intro.o -shared -g3 -c src/intro.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/intro.o -shared -g3 -c src/intro.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/world.o: src/game_3/world.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/world.o -shared -g3 -c src/game_3/world.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/world.o -shared -g3 -c src/game_3/world.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 o_files/ping_pong.o: src/game_4/ping_pong.cpp
-	g++ -std=c++14 -Wall -m64 -march=x86-64 -fPIC -shared -g3   -o o_files/ping_pong.o -shared -g3 -c src/game_4/ping_pong.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3   -o o_files/ping_pong.o -shared -g3 -c src/game_4/ping_pong.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 
 
@@ -177,8 +178,8 @@ o_files/ping_pong.o: src/game_4/ping_pong.cpp
 
 
 
-
-
+test: $(src_code)
+	g++ -std=c++14 -Wall -m32 -march=x86-64 -fPIC -shared -g3 -g3 -c $^ src/game_4/ping_pong.cpp  $(include_linux) $(linux_godot_lib_path_debug) $(linux_godot_lib_debug)
 
 
 

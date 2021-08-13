@@ -1,8 +1,0 @@
-PGO
-
-GCC has Profile-Guided Optimisations features. There isn't a lot of precise GCC documentation about it, but nevertheless getting it to run is quite straightforward.
-
-first compile your program with -fprofile-generate.
-let the program run (the execution time will be significantly slower as the code is also generating profile information into .gcda files).
-recompile the program with -fprofile-use. If your application is multi-threaded also add the -fprofile-correction flag.
-PGO with GCC can give amazing results and really significantly boost performance (I've seen a 15-20% speed increase on one of the projects I was recently working on). Obviously the issue here is to have some data that is sufficiently representative of your application's execution, which is #not always available or easy to obtain.
